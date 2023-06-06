@@ -54,7 +54,7 @@ const Register = () => {
   };
 
   return (
-    <div className="flex justify-center text-black py-22">
+    <div className="flex justify-center text-black py-28">
       <div className="card w-full max-w-lg shadow-2xl bg-gray-200">
         <h1 className="font-bold text-4xl text-center pt-6">
           Create An Account

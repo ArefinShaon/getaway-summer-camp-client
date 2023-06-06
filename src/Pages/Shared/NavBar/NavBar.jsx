@@ -1,41 +1,42 @@
-import { Link,  } from "react-router-dom";
+import { Link, useNavigate,  } from "react-router-dom";
 import logo from '../../../assets/dark-logo-img.png'
-// import { useContext } from "react";
-// import { AuthContext } from "../../Pages/Context/AuthProvider";
+import { useContext } from "react";
 
-// import { FaUser,  } from "react-icons/fa";
+
+import { FaUser,  } from "react-icons/fa";
+import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
 const NavBar = () => {
 
-//     const {user, logOut} = useContext(AuthContext);
-//   const navigate = useNavigate();
-//     const handleLogOut = () => {
-//       logOut()
-//         .then(() => {
-//           // Redirect to the home page
-//           navigate("/");
-//         })
-//         .catch((error) => console.log(error));
-//     };
+    const {user, logOut} = useContext(AuthContext);
+  const navigate = useNavigate();
+    const handleLogOut = () => {
+      logOut()
+        .then(() => {
+          // Redirect to the home page
+          navigate("/");
+        })
+        .catch((error) => console.log(error));
+    };
 
     const navItems = (
         <>
           <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About</Link></li>
-          <li><Link to="/login">Login</Link></li>
-          <li><Link to="/signup">Sign Up</Link></li>
+          <li><Link to="/instructors">Instructors</Link></li>
+          <li><Link to="/classes">Classes</Link></li>
+         
+         
           
-          {/* {user?.email ? (
+          {user?.email ? (
             <>
-              <li><Link to="/addToy">Add Toys</Link></li>
-              <li><Link to="/myToy">My Toys</Link></li>
+              <li><Link to="/dashboard">Dashboard</Link></li>
                     <li><button onClick={handleLogOut}>Log out</button></li>
                     <li className="nav-item-user">
                 
                 <span className="tooltip">
                 {user.photoURL ? (
                   <img
-                    className="rounded-full w-12 mx-2"
+                    className="rounded-full w-8 mx-2"
                     src={user.photoURL}
                     alt=""
                     title={user.displayName}
@@ -49,7 +50,7 @@ const NavBar = () => {
             </>
           ) : (
             <li><Link to="/login">Login</Link></li>
-          )} */}
+          )}
         </>
       );
     return (
