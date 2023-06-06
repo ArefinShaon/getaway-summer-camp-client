@@ -22,8 +22,9 @@ const NavBar = () => {
         <>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/about">About</Link></li>
-          <li><Link to="/blog">Blog</Link></li>
-          <li><Link to="/allToy">All Toys</Link></li>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/signup">Sign Up</Link></li>
+          
           {/* {user?.email ? (
             <>
               <li><Link to="/addToy">Add Toys</Link></li>
@@ -72,7 +73,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <button className="btn btn-outline btn-error">Place Order</button>
+            <button className="btn btn-outline btn-ghost">Place Order</button>
             </div>
         </div>
     );
