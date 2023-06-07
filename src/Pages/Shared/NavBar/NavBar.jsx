@@ -74,7 +74,7 @@ const NavBar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <button className="btn btn-outline btn-ghost">Place Order</button>
+            <button className="btn btn-outline btn-ghost"><span className="font-bold">Enroll Now</span></button>
             </div>
         </div>
     );
