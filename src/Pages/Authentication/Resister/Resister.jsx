@@ -4,7 +4,7 @@ import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import { useContext, useState } from "react";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [passwordError, setPasswordError] = useState("");
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
@@ -13,7 +13,7 @@ const Register = () => {
     event.preventDefault();
     setSuccess(false);
     const form = event.target;
-    // eslint-disable-next-line no-unused-vars
+    const name = form.name.value;
     const photo = form.photo.value;
     const email = form.email.value;
     const password = form.password.value;
@@ -41,11 +41,19 @@ const Register = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
-        console.log(user);
-        setSuccess(true);
-        swal("Good job!", "Successfully create an account", "success");
-        form.reset();
-        navigate("/login");
+       console.log(user);
+        // Update user profile with name and photo
+        updateUserProfile({ displayName: name, photoURL: photo })
+          .then(() => {
+            setSuccess(true);
+            swal("Good job!", "Successfully create an account", "success");
+            form.reset();
+            navigate("/");
+          })
+          .catch((error) => {
+            console.error(error);
+            setPasswordError(error.message);
+          });
       })
       .catch((error) => {
         console.error(error);
@@ -55,93 +63,93 @@ const Register = () => {
 
   return (
     <div className="flex justify-center text-black py-28">
-      <div className="card w-full max-w-lg shadow-2xl bg-gray-200">
-        <h1 className="font-bold text-4xl text-center pt-6">
-          Create An Account
-        </h1>
-        <form onSubmit={handleSignUp} className="card-body">
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text text-black">Your Name</span>
-            </label>
-            <input
-              name="name"
-              type="text"
-              placeholder="Name"
-              className="input input-bordered border-zinc-900 bg-white"
-              required
-            />
-            <label className="label">
-              <span className="label-text text-black">Your Photo</span>
-            </label>
-            <input
-              name="photo"
-              type="text"
-              placeholder="Photo URL"
-              className="input input-bordered border-zinc-900 bg-white"
-              required
-            />
-            <label className="label">
-              <span className="label-text text-black">Email Address</span>
-            </label>
-            <input
-              name="email"
-              type="email"
-              placeholder="Email"
-              className="input input-bordered border-zinc-900 bg-white"
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text text-black">Password</span>
-            </label>
-            <input
-              name="password"
-              type="password"
-              placeholder="Password"
-              className="input input-bordered border-zinc-900 bg-white"
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text text-black">Confirm Password</span>
-            </label>
-            <input
-              name="confirmPassword"
-              type="password"
-              placeholder="Confirm Password"
-              className="input input-bordered border-zinc-900 bg-white"
-              required
-            />
-          </div>
-          {passwordError && <p className="text-error">{passwordError}</p>}
-          {success && (
-            <div className="toast toast-end toast-middle">
-              <div className="alert alert-success">
-                <div>
-                  <span>User created successfully.</span>
-                </div>
+    <div className="card w-full max-w-lg shadow-2xl bg-gray-200">
+      <h1 className="font-bold text-4xl text-center pt-6">
+        Create An Account
+      </h1>
+      <form onSubmit={handleSignUp} className="card-body">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text text-black">Your Name</span>
+          </label>
+          <input
+            name="name"
+            type="text"
+            placeholder="Name"
+            className="input input-bordered border-zinc-900 bg-white"
+            required
+          />
+          <label className="label">
+            <span className="label-text text-black">Your Photo</span>
+          </label>
+          <input
+            name="photo"
+            type="text"
+            placeholder="Photo URL"
+            className="input input-bordered border-zinc-900 bg-white"
+            required
+          />
+          <label className="label">
+            <span className="label-text text-black">Email Address</span>
+          </label>
+          <input
+            name="email"
+            type="email"
+            placeholder="Email"
+            className="input input-bordered border-zinc-900 bg-white"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text text-black">Password</span>
+          </label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            className="input input-bordered border-zinc-900 bg-white"
+            required
+          />
+        </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text text-black">Confirm Password</span>
+          </label>
+          <input
+            name="confirmPassword"
+            type="password"
+            placeholder="Confirm Password"
+            className="input input-bordered border-zinc-900 bg-white"
+            required
+          />
+        </div>
+        {passwordError && <p className="text-error">{passwordError}</p>}
+        {success && (
+          <div className="toast toast-end toast-middle">
+            <div className="alert alert-success">
+              <div>
+                <span>User created successfully.</span>
               </div>
             </div>
-          )}
-          <div className="form-control mt-6">
-            <input
-              type="submit"
-              className="btn bg-black text-white btn-outline"
-              value="Sign Up"
-            />
           </div>
-        </form>
-        <div className="flex justify-center mt-4 mb-4">
-          <p>Already have an account?</p>
-          <Link to="/login" className="text-cyan-600 font-semibold ml-2">
-            Log In
-          </Link>
+        )}
+        <div className="form-control mt-6">
+          <input
+            type="submit"
+            className="btn bg-black text-white btn-outline"
+            value="Sign Up"
+          />
         </div>
+      </form>
+      <div className="flex justify-center mt-4 mb-4">
+        <p>Already have an account?</p>
+        <Link to="/login" className="text-cyan-600 font-semibold ml-2">
+          Log In
+        </Link>
       </div>
     </div>
+  </div>
   );
 };
 
