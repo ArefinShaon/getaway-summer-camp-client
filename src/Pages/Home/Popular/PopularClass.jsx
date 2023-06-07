@@ -26,7 +26,7 @@ const PopularClass = () => {
   return (
     <div className="mt-12">
       <Bounce triggerOnce>
-        <h2 className="text-center text-5xl my-10 font-bold hover:text-green-500 transition-colors">
+        <h2 className="text-center text-5xl mt-10 font-bold hover:text-green-500 transition-colors">
           <span>Our</span> <br /> Popular Classes
               </h2>
               <div className="divider bg-slate-700 rounded lg:w-96 mx-auto"></div>
