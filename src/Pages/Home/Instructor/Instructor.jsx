@@ -54,7 +54,7 @@ const Instructor = () => {
   };
 
   return (
-    <div className="mt-12">
+    <div className="mt-12 lg:mx-16">
       <Bounce triggerOnce>
         <h2 className="text-center text-4xl mt-10 font-bold hover:text-green-500 transition-colors">
           <span>OUR</span> <br /> Best Instructors

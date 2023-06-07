@@ -2,7 +2,7 @@ import img from "../../../assets/man-with-camera-world-photographer-day.jpg";
 
 const AboutUs = () => {
   return (
-    <div>
+    <div className="lg:mx-16">
       <div className="hero min-h-screen bg-green-50">
         <div className="hero-content flex-col-reverse lg:flex-row-reverse">
           <img

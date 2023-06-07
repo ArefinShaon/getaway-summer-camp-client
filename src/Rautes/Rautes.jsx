@@ -9,6 +9,7 @@ import Resister from "../Pages/Authentication/Resister/Resister";
 import Dashboard from "../Layout/Dashboard";
 import ManageUser from "../Pages/Dashboard/Admin/ManageUser";
 import InstructorTable from "../Pages/InstructorTable/InstructorTable";
+import ClassesTable from "../Pages/ClassesTable/ClassesTable";
 
   
 export const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
           {
             path: 'instructors',
             element:<InstructorTable></InstructorTable>
+          },
+          {
+            path: 'classes',
+            element:<ClassesTable></ClassesTable>
           }
       ]
   },
