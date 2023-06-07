@@ -1,3 +1,4 @@
+import AboutUs from "../AboutUs/AboutUs";
 import Banner from "../Banner/Banner";
 import Gallery from "../Gallery/Gallery";
 import Instructor from "../Instructor/Instructor";
@@ -11,6 +12,7 @@ const Home = () => {
             <PopularClass></PopularClass>
             <Instructor></Instructor>
             <Gallery></Gallery>
+            <AboutUs></AboutUs>
         </div>
     );
 };

@@ -77,7 +77,7 @@ const Instructor = () => {
                   className="instructor-image rounded"
                 />
                 <div className="instructor-details mt-4">
-                  <h2 className="instructor-name text-center text-green-500 font-bold">Instructor No: {index + 1}. {classItem.instructor_name}</h2>
+                  <h2 className="instructor-name text-center text-black font-bold">Instructor No: {index + 1}. {classItem.instructor_name}</h2>
                   
                 </div>
               </div>
