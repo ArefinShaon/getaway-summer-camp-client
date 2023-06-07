@@ -1,4 +1,5 @@
 import Banner from "../Banner/Banner";
+import Gallery from "../Gallery/Gallery";
 import Instructor from "../Instructor/Instructor";
 import PopularClass from "../Popular/PopularClass";
 
@@ -9,6 +10,7 @@ const Home = () => {
             <Banner></Banner>
             <PopularClass></PopularClass>
             <Instructor></Instructor>
+            <Gallery></Gallery>
         </div>
     );
 };
