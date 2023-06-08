@@ -48,7 +48,7 @@ const Register = () => {
             setSuccess(true);
             swal("Good job!", "Successfully create an account", "success");
             form.reset();
-            navigate("/");
+            navigate("/login");
           })
           .catch((error) => {
             console.error(error);

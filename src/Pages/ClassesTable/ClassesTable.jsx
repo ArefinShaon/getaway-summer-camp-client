@@ -49,7 +49,8 @@ const ClassesTable = () => {
 
     const alreadySelected = selectedClasses.includes(classId);
     if (!alreadySelected) {
-      setSelectedClasses([...selectedClasses, classId]);
+        setSelectedClasses([...selectedClasses, classId]);
+        console.log(selectedClasses);
       // Perform any additional logic for selecting the class
     }
   };

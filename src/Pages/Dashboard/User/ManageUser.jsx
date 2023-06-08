@@ -1,9 +1,8 @@
 
-
 const ManageUser = () => {
     return (
         <div>
-            <h2>No user</h2>
+            <h2>Home</h2>
         </div>
     );
 };

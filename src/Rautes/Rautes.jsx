@@ -7,9 +7,9 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Authentication/Login/Login";
 import Resister from "../Pages/Authentication/Resister/Resister";
 import Dashboard from "../Layout/Dashboard";
-import ManageUser from "../Pages/Dashboard/Admin/ManageUser";
 import InstructorTable from "../Pages/InstructorTable/InstructorTable";
 import ClassesTable from "../Pages/ClassesTable/ClassesTable";
+import ManageUser from "../Pages/Dashboard/User/ManageUser";
 
   
 export const router = createBrowserRouter([
