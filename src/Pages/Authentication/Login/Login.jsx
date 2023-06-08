@@ -5,7 +5,6 @@ import { GoogleAuthProvider } from "firebase/auth";
 import swal from "sweetalert";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 
-// For log in section
 const Login = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
@@ -15,21 +14,20 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const { from } = location.state || { from: { pathname: "/" } };
 
-  // For google log in
   const handleGoogleSignIn = () => {
     providerLogin(googleProvider)
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from);
         swal("Good job!", "Successfully Log In", "success");
-        navigate(from, { replace: true });
+       
       })
       .catch((error) => console.error(error));
   };
 
-  // Submit on form
   const handleSubmit = (event) => {
     event.preventDefault();
     setSuccess(false);
@@ -45,7 +43,7 @@ const Login = () => {
         setSuccess(true);
         swal("Good job!", "Successfully Log In", "success");
         form.reset();
-        navigate(from, { replace: true });
+        navigate(from);
       })
       .catch((error) => {
         console.error(error);
@@ -53,7 +51,6 @@ const Login = () => {
       });
   };
 
-  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
