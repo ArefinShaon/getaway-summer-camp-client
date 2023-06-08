@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 const ClassesTable = () => {
   const { isLoading, isError, data, error } = useQuery([""], async () => {
-    const response = await fetch("http://localhost:5000/class");
+    const response = await fetch("https://summer-camp-server-rho.vercel.app/class");
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -62,7 +62,7 @@ const ClassesTable = () => {
   
         // Check if the class is already selected for the current user
         const response = await fetch(
-          `http://localhost:5000/users?email=${user.email}&selected=true`
+          `https://summer-camp-server-rho.vercel.app/users?email=${user.email}&selected=true`
         );
         const existingSelections = await response.json();
   
@@ -79,7 +79,7 @@ const ClassesTable = () => {
           });
         } else {
           // Send the selected class to the backend
-          const response = await fetch("http://localhost:5000/users", {
+          const response = await fetch("https://summer-camp-server-rho.vercel.app/users", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

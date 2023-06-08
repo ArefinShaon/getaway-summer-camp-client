@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const InstructorTable = () => {
   const { isLoading, isError, data, error } = useQuery([""], async () => {
-    const response = await fetch("http://localhost:5000/class");
+    const response = await fetch("https://summer-camp-server-rho.vercel.app/class");
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

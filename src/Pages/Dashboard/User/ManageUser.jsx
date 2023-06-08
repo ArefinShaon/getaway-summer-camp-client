@@ -24,7 +24,7 @@ const ManageUser = () => {
         }
 
         const response = await fetch(
-          `http://localhost:5000/users?email=${user.email}`
+          `https://summer-camp-server-rho.vercel.app/users?email=${user.email}`
         );
 
         if (!response.ok) {
@@ -45,7 +45,7 @@ const ManageUser = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/users/${id}`, {
+      const response = await fetch(`https://summer-camp-server-rho.vercel.app/users/${id}`, {
         method: "DELETE",
       });
 

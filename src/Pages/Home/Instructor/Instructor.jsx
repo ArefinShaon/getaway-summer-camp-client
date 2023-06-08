@@ -11,7 +11,7 @@ const Instructor = () => {
   useEffect(() => {
     // Fetch popular classes data
     axios
-      .get("http://localhost:5000/class")
+      .get("https://summer-camp-server-rho.vercel.app/class")
       .then((response) => {
         const sortedClasses = response.data.sort(
           (a, b) => b.students - a.students
