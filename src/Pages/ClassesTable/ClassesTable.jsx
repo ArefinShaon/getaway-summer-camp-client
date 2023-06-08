@@ -133,7 +133,7 @@ const ClassesTable = () => {
                 <img
                   src={instructor.image}
                   alt={instructor.name}
-                  className="w-12 h-12 rounded-full block"
+                  className="w-12 h-12 rounded-full mx-auto"
                 />
               </td>
               <td >{instructor.name}</td>
