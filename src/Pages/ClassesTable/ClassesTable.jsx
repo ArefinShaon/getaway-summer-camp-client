@@ -13,7 +13,7 @@ const ClassesTable = () => {
     return response.json();
   });
 
-  const { user } = useContext(AuthContext); // Replace with your actual AuthContext
+  const { user } = useContext(AuthContext); 
   const [selectedClasses, setSelectedClasses] = useState([]);
   const navigate = useNavigate();
 
