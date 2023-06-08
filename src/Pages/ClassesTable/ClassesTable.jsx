@@ -29,7 +29,7 @@ const ClassesTable = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const handleSelect = (classId) => {
+  const handleSelect = async (classId, classData) => {
     if (!user) {
       Swal.fire({
         title: "Please log in",
@@ -46,14 +46,71 @@ const ClassesTable = () => {
       });
       return;
     }
-
+  
     const alreadySelected = selectedClasses.includes(classId);
     if (!alreadySelected) {
-        setSelectedClasses([...selectedClasses, classId]);
-        console.log(selectedClasses);
-      // Perform any additional logic for selecting the class
+      try {
+        const payload = {
+          email: user.email,
+          selected: true,
+          userId: classData._id,
+          image: classData.image,
+          name: classData.name,
+          price: classData.price,
+          availableSeats: classData.availableSeats,
+        };
+  
+        // Check if the class is already selected for the current user
+        const response = await fetch(
+          `http://localhost:5000/users?email=${user.email}&selected=true`
+        );
+        const existingSelections = await response.json();
+  
+        const alreadySelectedClass = existingSelections.find(
+          (selection) => selection.userId === classData._id
+        );
+  
+        if (alreadySelectedClass) {
+          // Class is already selected for the current user, display a toast message
+          Swal.fire({
+            title: "Already Selected",
+            text: "You have already selected this class.",
+            icon: "info",
+          });
+        } else {
+          // Send the selected class to the backend
+          const response = await fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+  
+          if (!response.ok) {
+            throw new Error(
+              "Failed to send the selected class to the backend."
+            );
+          }
+  
+          setSelectedClasses((prevSelectedClasses) => [
+            ...prevSelectedClasses,
+            classId,
+          ]);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      // Class is already selected, display a toast message
+      Swal.fire({
+        title: "Already Selected",
+        text: "You have already selected this class.",
+        icon: "info",
+      });
     }
   };
+  
 
   return (
     <div className="instructors-page mt-24">
@@ -93,7 +150,7 @@ const ClassesTable = () => {
                 ) : (
                   <button
                     className="btn btn-ghost"
-                    onClick={() => handleSelect(instructor._id)}
+                    onClick={() => handleSelect(instructor._id, instructor)}
                     disabled={instructor.availableSeats === 0}
                   >
                     {instructor.availableSeats === 0 ? "Sold Out" : "Select"}
