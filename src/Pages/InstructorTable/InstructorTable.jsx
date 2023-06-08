@@ -22,30 +22,30 @@ const InstructorTable = () => {
   }
 
   return (
-    <div className="instructors-page mt-24">
+    <div className="mt-24 overflow-x-auto w-full">
       <h1 className="text-3xl font-bold text-center m-4">THE INSTRUCTORS</h1>
-      <table className="w-full border-collapse">
+      <table className="w-full table text-center">
         <thead>
-          <tr>
-            <th className="px-4 py-2">Image</th>
-            <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Email</th>
+          <tr className="text-xl font-bold">
+            <th>Image</th>
+            <th>Name</th>
+            <th>Email</th>
           </tr>
         </thead>
         <tbody>
           {data.map((instructor) => (
             <tr key={instructor._id}>
-              <td className="px-4 py-2">
+              <td className="mx-auto">
                 <img
                   src={instructor.instructor_image}
                   alt={instructor.name}
-                  className="w-12 h-12 rounded-full block mx-auto"
+                  className="w-12 h-12 rounded-full block mx-auto "
                 />
               </td>
-              <td className="px-4 py-2 text-center">
+              <td className="">
                 {instructor.instructor_name}
               </td>
-              <td className="px-4 py-2 text-center">
+              <td className="">
                 {instructor.instructor_email}
               </td>
             </tr>

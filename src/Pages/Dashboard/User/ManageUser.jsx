@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import { useContext } from "react";
 import { FaWallet } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ManageUser = () => {
   const { user } = useContext(AuthContext);
@@ -85,11 +86,11 @@ const ManageUser = () => {
   }
 
   return (
-    <div className="bg-green-50">
+    <div className="bg-green-50 overflow-x-auto">
       <h1 className="text-3xl font-bold text-center mt-4 mb-8">
         My Selected Class
       </h1>
-      <table className="w-full border-collapse">
+      <table className="w-full border-collapse table text-center">
         <thead>
           <tr>
             <th className="px-4 py-2">Image</th>
@@ -112,9 +113,9 @@ const ManageUser = () => {
               <td className="px-4 py-2 text-center">{instructor.name}</td>
               <td className="px-4 py-2 text-center">{instructor.email}</td>
               <td className="px-4 py-2 text-center">
-                <button className="btn btn-square btn-outline bg-green-500">
+                <Link to='/dashboard/pay' className="btn btn-square btn-outline bg-green-500">
                   <FaWallet />
-                </button>
+                </Link>
               </td>
               <td className="px-4 py-2 text-center">
                 <button

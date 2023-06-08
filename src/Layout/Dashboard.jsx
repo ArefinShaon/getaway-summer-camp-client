@@ -10,7 +10,7 @@ const Dashboard = () => {
   return (
     <div className="drawer lg:drawer-open bg-green-50">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content flex flex-col  justify-center">
+      <div className="drawer-content flex flex-col justify-center overflow-x-auto">
         <Outlet></Outlet>
         <label
           htmlFor="my-drawer-2"
@@ -21,7 +21,7 @@ const Dashboard = () => {
       </div>
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 h-full bg-green-200 text-base-content">
+        <ul className="menu p-4 w-60 md:w-80 h-full bg-green-200 text-base-content">
           <li>
             <NavLink to="/dashboard/manageUser">
               <FaCartArrowDown></FaCartArrowDown>
@@ -29,7 +29,7 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/dashboard/reservations">
+            <NavLink to="/dashboard/enrolled">
               <FaGraduationCap></FaGraduationCap> My Enrolled Classes
             </NavLink>
           </li>

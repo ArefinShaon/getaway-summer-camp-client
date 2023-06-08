@@ -10,6 +10,9 @@ import Dashboard from "../Layout/Dashboard";
 import InstructorTable from "../Pages/InstructorTable/InstructorTable";
 import ClassesTable from "../Pages/ClassesTable/ClassesTable";
 import ManageUser from "../Pages/Dashboard/User/ManageUser";
+import Enrolled from "../Pages/Dashboard/Enrolled/Enrolled";
+import PayHistory from "../Pages/Dashboard/PayHistory/PayHistory";
+import Payment from "../Pages/Dashboard/Payment/Payment";
 
   
 export const router = createBrowserRouter([
@@ -47,6 +50,18 @@ export const router = createBrowserRouter([
       {
         path: 'manageUser', 
         element: <ManageUser></ManageUser>
+      },
+      {
+        path: 'enrolled', 
+        element: <Enrolled></Enrolled>
+      },
+      {
+        path: 'history', 
+        element: <PayHistory></PayHistory>
+      },
+      {
+        path: 'pay', 
+        element: <Payment></Payment>
       }
     ]
   }

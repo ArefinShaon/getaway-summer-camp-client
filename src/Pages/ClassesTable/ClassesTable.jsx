@@ -113,38 +113,38 @@ const ClassesTable = () => {
   
 
   return (
-    <div className="instructors-page mt-24">
+    <div className="m-8 mt-24 overflow-x-auto ">
       <h1 className="text-3xl font-bold text-center m-4">CAMP - CLASSES</h1>
-      <table className="w-full border-collapse">
+      <table className="w-full table text-center border-collapse ">
         <thead>
-          <tr>
-            <th className="px-4 py-2">Image</th>
-            <th className="px-4 py-2">Name</th>
-            <th className="px-4 py-2">Instructor</th>
-            <th className="px-4 py-2">Available Seats</th>
-            <th className="px-4 py-2">Price</th>
-            <th className="px-4 py-2">Add</th>
+          <tr className="text-xl font-bold">
+            <th>Image</th>
+            <th>Name</th>
+            <th>Instructor</th>
+            <th>Available Seats</th>
+            <th>Price</th>
+            <th>Add</th>
           </tr>
         </thead>
         <tbody>
           {data.map((instructor) => (
             <tr key={instructor._id}>
-              <td className="px-4 py-2">
+              <td >
                 <img
                   src={instructor.image}
                   alt={instructor.name}
-                  className="w-12 h-12 rounded-full block mx-auto"
+                  className="w-12 h-12 rounded-full block"
                 />
               </td>
-              <td className="px-4 py-2 text-center">{instructor.name}</td>
-              <td className="px-4 py-2 text-center">
+              <td >{instructor.name}</td>
+              <td >
                 {instructor.instructor_name}
               </td>
-              <td className="px-4 py-2 text-center">
+              <td>
                 {instructor.availableSeats}
               </td>
-              <td className="px-4 py-2 text-center">{instructor.price}$</td>
-              <td className="px-4 py-2 text-center">
+              <td>{instructor.price}$</td>
+              <td>
                 {selectedClasses.includes(instructor._id) ? (
                   <button className="btn btn-disabled">Selected</button>
                 ) : (
