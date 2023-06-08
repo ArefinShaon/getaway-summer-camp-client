@@ -1,32 +1,76 @@
-import { useEffect } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 import { AuthContext } from "../../../contexts/AuthProvider/AuthProvider";
 import { useContext } from "react";
-import {
-    FaWallet
-  } from "react-icons/fa";
+import { FaWallet } from "react-icons/fa";
+
 const ManageUser = () => {
   const { user } = useContext(AuthContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [users, setUsers] = useState([]);
 
-  const { isLoading, isError, data, error, refetch } = useQuery(
-    ["userQuery"],
-    async () => {
-      if (!user) {
-        return [];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        if (!user) {
+          setUsers([]);
+          setIsLoading(false);
+          return;
+        }
+
+        const response = await fetch(
+          `http://localhost:5000/users?email=${user.email}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
       }
-      const response = await fetch(
-        `http://localhost:5000/users?email=${user.email}`
-      );
+    };
+
+    fetchData();
+  }, [user]);
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/users/${id}`, {
+        method: "DELETE",
+      });
+
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-      return response.json();
-    }
-  );
 
-  useEffect(() => {
-    refetch();
-  }, [user, refetch]);
+      setUsers((prevUsers) => prevUsers.filter((user) => user._id !== id));
+
+      // Show success notification
+      Swal.fire({
+        icon: "success",
+        title: "Deleted",
+        text: "User deleted successfully.",
+      });
+    } catch (error) {
+      setError(error);
+
+      // Show error notification
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to delete user.",
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -36,13 +80,15 @@ const ManageUser = () => {
     );
   }
 
-  if (isError) {
+  if (error) {
     return <div>Error: {error.message}</div>;
   }
 
   return (
     <div className="bg-green-50">
-      <h1 className="text-3xl font-bold text-center mt-4 mb-8">My Selected Class</h1>
+      <h1 className="text-3xl font-bold text-center mt-4 mb-8">
+        My Selected Class
+      </h1>
       <table className="w-full border-collapse">
         <thead>
           <tr>
@@ -54,7 +100,7 @@ const ManageUser = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((instructor) => (
+          {users.map((instructor) => (
             <tr key={instructor._id}>
               <td className="px-4 py-2">
                 <img
@@ -66,12 +112,15 @@ const ManageUser = () => {
               <td className="px-4 py-2 text-center">{instructor.name}</td>
               <td className="px-4 py-2 text-center">{instructor.email}</td>
               <td className="px-4 py-2 text-center">
-              <button className="btn btn-square btn-outline bg-green-500">
-                <FaWallet></FaWallet>
+                <button className="btn btn-square btn-outline bg-green-500">
+                  <FaWallet />
                 </button>
               </td>
               <td className="px-4 py-2 text-center">
-                <button className="btn btn-circle btn-outline bg-red-600">
+                <button
+                  className="btn btn-circle btn-outline bg-red-600"
+                  onClick={() => handleDelete(instructor._id)}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-6 w-6"
