@@ -110,57 +110,36 @@ const ClassesTable = () => {
       });
     }
   };
-  
 
   return (
-    <div className="m-8 mt-24 overflow-x-auto ">
-      <h1 className="text-3xl font-bold text-center m-4">CAMP - CLASSES</h1>
-      <table className="w-full table text-center border-collapse ">
-        <thead>
-          <tr className="text-xl font-bold">
-            <th>Image</th>
-            <th>Name</th>
-            <th>Instructor</th>
-            <th>Available Seats</th>
-            <th>Price</th>
-            <th>Add</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((instructor) => (
-            <tr key={instructor._id}>
-              <td >
-                <img
-                  src={instructor.image}
-                  alt={instructor.name}
-                  className="w-12 h-12 rounded-full mx-auto"
-                />
-              </td>
-              <td >{instructor.name}</td>
-              <td >
-                {instructor.instructor_name}
-              </td>
-              <td>
-                {instructor.availableSeats}
-              </td>
-              <td>{instructor.price}$</td>
-              <td>
-                {selectedClasses.includes(instructor._id) ? (
-                  <button className="btn btn-disabled">Selected</button>
-                ) : (
-                  <button
-                    className="btn btn-ghost"
-                    onClick={() => handleSelect(instructor._id, instructor)}
-                    disabled={instructor.availableSeats === 0}
-                  >
-                    {instructor.availableSeats === 0 ? "Sold Out" : "Select"}
-                  </button>
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+    <div className="m-8 mt-24 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <h1 className="text-3xl font-bold text-center m-4 col-span-full">CAMP - CLASSES</h1>
+      {data.map((instructor) => (
+        <div key={instructor._id} className="bg-pink-200 p-4 rounded shadow">
+          <img
+            src={instructor.image}
+            alt={instructor.name}
+            className="w-12 h-12 rounded-full mx-auto mb-4"
+          />
+          <h2 className="text-xl font-bold text-center">Class Name:{instructor.name}</h2>
+          <p className="text-center">Instructor Name:{instructor.instructor_name}</p>
+          <p className="text-center">Available Seats: {instructor.availableSeats}</p>
+          <p className="text-center">Price: {instructor.price}$</p>
+          <div className="flex justify-center">
+            {selectedClasses.includes(instructor._id) ? (
+              <button className="btn btn-disabled">Selected</button>
+            ) : (
+              <button
+                className="btn btn-secondary"
+                onClick={() => handleSelect(instructor._id, instructor)}
+                disabled={instructor.availableSeats === 0}
+              >
+                {instructor.availableSeats === 0 ? "Sold Out" : "Select"}
+              </button>
+            )}
+          </div>
+        </div>
+      ))}
     </div>
   );
 };
